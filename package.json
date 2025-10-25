@@ -1,0 +1,29 @@
+{
+  "name": "login_page",
+  "version": "1.0.0",
+  "main": "index.js",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vidyasar/vidyasar-web.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vidyasar/vidyasar-web/issues"
+  },
+  "homepage": "https://github.com/vidyasar/vidyasar-web#readme",
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0",
+    "nodemailer": "^7.0.10",
+    "nodemon": "^3.1.10"
+  }
+}

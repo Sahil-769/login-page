@@ -1,0 +1,26 @@
+# Composer dependencies
+/backend/vendor/
+
+# Backup directories
+/comment_backups/
+
+# Environment variables file
+# If you use a .env file for environment variables, it's a good practice to ignore it.
+.env
+.env.local
+.env.*.local
+
+# Log files
+/logs/
+*.log
+
+# IDE and editor directories
+.idea/
+.vscode/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+#vendor files
+/vendor/

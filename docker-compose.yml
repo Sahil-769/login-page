@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  vidyasaar-login:
+    build: .
+    container_name: vidyasaar-login-app
+    ports:
+      - "3000:3000"
+    environment:
+      # Server Configuration
+      - PORT=3000
+      - NODE_ENV=production
+      - APP_URL=http://localhost:3000
+      
+      # Email Configuration (Gmail SMTP with Nodemailer)
+      - SMTP_HOST=smtp.gmail.com
+      - SMTP_PORT=587
+      - SMTP_USER=sahilalvi769@gmail.com
+      - SMTP_PASS=${SMTP_PASS}
+      - FROM_EMAIL=sahilalvi769@gmail.com
+      - FROM_NAME=Vidyasaar Institute
+      
+      # Admin Configuration
+      - ADMIN_EMAIL=sahilalvi769@gmail.com
+    
+    restart: unless-stopped
+    
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3000', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s

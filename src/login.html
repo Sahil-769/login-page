@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vidyasaar - Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="/login.css" />
+</head>
+
+<body>
+  <div class="login_box" style="background-size: cover; background-position: center; background-repeat: no-repeat; background-color: rgba(0,0,0,0.35); background-blend-mode: overlay;">
+    <div class="login-container">
+      <div class="logo">
+        <div class="button-container">
+          <div class="slider student-active"></div>
+          <button class="toggle-button active" onclick="switchRole('student')">Student</button>
+          <button class="toggle-button" onclick="switchRole('teacher')">Teacher</button>
+          <button class="toggle-button" onclick="switchRole('institute')">Institute</button>
+        </div>
+        <h1>Vidyasaar</h1>
+        <p>The Intelligent Institute Ecosystem</p>
+      </div>
+
+      
+      <form id="student" class="form-group active">
+        <label>Username</label>
+        <input type="text" placeholder="Enter username" required />
+        <label>Password</label>
+        <div class="password-field">
+          <input type="password" placeholder="Enter password" required />
+          <button type="button" class="toggle-password" onclick="togglePassword(this)">
+            <i class="fas fa-eye"></i>
+          </button>
+        </div>
+        <button type="button" class="login-btn" onclick="onClickLogin()">Login</button>
+      </form>
+
+      
+      <form id="teacher" class="form-group">
+        <label>Username</label>
+        <input type="text" placeholder="Enter username" required />
+        <label>Password</label>
+        <div class="password-field">
+          <input type="password" placeholder="Enter password" required />
+          <button type="button" class="toggle-password" onclick="togglePassword(this)">
+            <i class="fas fa-eye"></i>
+          </button>
+        </div>
+        <button type="button" class="login-btn" onclick="onClickLogin()">Login</button>
+      </form>
+
+      
+      <form id="institute-signin" class="form-group">
+        <label>Email Address</label>
+        <input id="instituteSigninEmail" type="email" placeholder="Enter email" required />
+        <label>Password</label>
+        <div class="password-field">
+          <input id="instituteSigninPassword" type="password" placeholder="Enter password" required />
+          <button type="button" class="toggle-password" onclick="togglePassword(this)">
+            <i class="fas fa-eye"></i>
+          </button>
+        </div>
+        <button type="button" class="login-btn" onclick="instituteLogin()">Sign In</button>
+        <button type="button" class="back-btn" style="margin-top:10px" onclick="showInstituteSignup()">New Institute? Register</button>
+      </form>
+
+      
+      <form id="institute-step1" class="form-group">
+        <label>Institute Name</label>
+        <input type="text" placeholder="Enter institute name" required />
+        <label>Address</label>
+        <input type="text" placeholder="Enter address" required />
+        <label>City / State</label>
+        <input type="text" placeholder="Enter city/state" required />
+        <label>Pincode</label>
+        <input type="text" placeholder="Enter pincode" required />
+  <button type="button" disabled class="login-btn" id="signBtn1">Continue</button>
+        <button type="button" class="back-btn" style="margin-top:10px" onclick="showInstituteSignin()">Already Registered? Sign In</button>
+      </form>
+
+      
+      <form id="institute-step2" class="form-group">
+        <h2 style="margin:10px 0px;">Institute Registration</h2>
+        <label>Email Address</label>
+        <input id="instEmail" type="email" placeholder="Enter email" required />
+
+
+        <label>Phone Number</label>
+        <input id="instPhone" type="tel" placeholder="Enter phone number" required />
+
+        <label>Password</label>
+        <input id="instPassword"  type="password" placeholder="Create password" required />
+         <button type="button" class="toggle-password"
+        style="position:absolute;
+            width: fit-content;height: fit-content;
+            bottom: 0px;top:257px;
+            left: 95%;" onclick="togglePassword(this)">
+            <i class="fas fa-eye"></i>
+          </button>
+
+        <label>Confirm Password</label>
+        <input id="instPasswordConfirm" type="password" placeholder="Confirm password" required />
+        <button type="button" class="toggle-password" style="position:absolute;
+            width: fit-content;height: fit-content;
+            bottom: 0px;top:335px;
+            left: 95%;"  onclick="togglePassword(this)">
+            <i class="fas fa-eye"></i>
+          </button>
+        <div class="password-strength" aria-hidden="false">
+          <div class="strength">
+            <div class="fill" id="pwdFill" style="width:0%"></div>
+          </div>
+          <div class="strength-text" id="pwdText">Too short</div>
+        </div>
+         
+        <div class="step-buttons">
+          <button type="button" class="back-btn" onclick="goToStep(1)"><i class="fas fa-arrow-left"></i> Back</button>
+          <button type="button" id="signBtn2" disabled class="login-btn">Continue</button>
+        </div>
+      </form>
+
+      
+      <form id="institute-step3" class="form-group">
+        <h2>Verify Email</h2>
+        <p class="info-text">We've sent an OTP to your email address.</p>
+        <input id="otpInput" type="text" placeholder="Enter OTP" maxlength="6" required />
+        <div class="otp-timer" id="otpTimer" style="margin: 10px 0; text-align: center; font-size: 14px; color: #666;">
+          <span id="timerText">Resend OTP in <strong id="timerCount">30</strong>s</span>
+          <button type="button" id="resendBtn" class="resend-link" style="display: none; background: none; border: none; color: #4CAF50; cursor: pointer; text-decoration: underline; font-size: 14px;" onclick="resendOTP()">Resend OTP</button>
+        </div>
+        <div class="step-buttons">
+          <button type="button" class="back-btn" onclick="goToStep(2)"><i class="fas fa-arrow-left"></i> Back</button>
+          <button type="button" class="login-btn" onclick="verifyOTP()">Verify</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast notification container -->
+  <div id="toast" style="position: fixed; top: 20px; right: 20px; background: #4CAF50; color: white; padding: 16px 24px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); display: none; z-index: 9999; font-size: 14px; max-width: 300px;">
+    <span id="toastMessage"></span>
+  </div>
+
+  <script src="login.js"></script>
+</body>
+</html>
