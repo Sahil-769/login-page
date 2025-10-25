@@ -1,6 +1,12 @@
 const express = require('express')
 const path = require('path')
-const { sendOTPEmail, sendWelcomeEmail, sendAdminApprovalEmail } = require('./mailer')
+
+const USE_SENDGRID = process.env.USE_SENDGRID === 'true'
+const mailer = USE_SENDGRID 
+  ? require('./mailer-sendgrid')
+  : require('./mailer')
+
+const { sendOTPEmail, sendWelcomeEmail, sendAdminApprovalEmail } = mailer
 const app = express()
 const port = process.env.PORT || 3000
 
