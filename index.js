@@ -1,12 +1,9 @@
 const express = require('express')
 const path = require('path')
 
-const USE_SENDGRID = process.env.USE_SENDGRID === 'true'
-const mailer = USE_SENDGRID 
-  ? require('./mailer-sendgrid')
-  : require('./mailer')
+const mailer = require('./mailer-brevo-api')
 
-const { sendOTPEmail, sendWelcomeEmail, sendAdminApprovalEmail } = mailer
+const { sendOTPEmail, sendAdminApprovalEmail } = mailer
 const app = express()
 const port = process.env.PORT || 3000
 

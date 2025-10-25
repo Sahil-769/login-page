@@ -2,16 +2,23 @@
 
 ## Render Deployment Steps
 
-### 1. Environment Variables Setup
+### 1. Get Brevo API Key
+
+⚠️ **IMPORTANT**: We're using Brevo API (not SMTP) because Render blocks SMTP ports.
+
+1. Go to [Brevo Dashboard](https://app.brevo.com)
+2. Click **Settings** → **SMTP & API**
+3. Click **API Keys** tab
+4. Click **Generate a new API key**
+5. Name it: `Production API`
+6. Copy the API key (starts with `xkeysib-`)
+
+### 2. Environment Variables Setup
 
 Go to your Render dashboard and add these environment variables:
 
 ```env
-USE_SENDGRID=false
-SMTP_HOST=smtp-relay.brevo.com
-SMTP_PORT=587
-SMTP_USER=9a07ac001@smtp-brevo.com
-SMTP_PASS=your-brevo-smtp-key-from-dashboard
+BREVO_API_KEY=your-brevo-api-key-here
 FROM_EMAIL=sahilalvi769@gmail.com
 FROM_NAME=Vidyasaar Institute
 ADMIN_EMAIL=sahilalvi769@gmail.com
@@ -20,9 +27,9 @@ NODE_ENV=production
 PORT=3000
 ```
 
-**Note**: Replace `your-brevo-smtp-key-from-dashboard` with your actual Brevo SMTP key from your Brevo account settings.
+**Note**: Replace `your-brevo-api-key-here` with your actual Brevo API key from step 1.
 
-### 2. Verify Brevo Sender Email
+### 3. Verify Brevo Sender Email
 
 ⚠️ **CRITICAL STEP** - Without this, emails will NOT work:
 
@@ -33,13 +40,13 @@ PORT=3000
 5. Check your Gmail for verification email from Brevo
 6. Click the verification link
 
-### 3. Deploy
+### 4. Deploy
 
 1. Push code to GitHub (already done ✓)
 2. Render will auto-deploy from your repository
 3. Check deployment logs for any errors
 
-### 4. Test Production
+### 5. Test Production
 
 After deployment, test the complete flow:
 
