@@ -12,11 +12,18 @@ const EMAIL_CONFIG = {
 const transporter = nodemailer.createTransport({
   host: EMAIL_CONFIG.SMTP_HOST,
   port: EMAIL_CONFIG.SMTP_PORT,
-  secure: false,
+  secure: EMAIL_CONFIG.SMTP_PORT == 465,
   auth: {
     user: EMAIL_CONFIG.SMTP_USER,
     pass: EMAIL_CONFIG.SMTP_PASS
-  }
+  },
+  tls: {
+    rejectUnauthorized: false,
+    minVersion: 'TLSv1.2'
+  },
+  connectionTimeout: 10000,
+  greetingTimeout: 10000,
+  socketTimeout: 10000
 })
 
 transporter.verify((error, success) => {
