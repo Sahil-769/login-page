@@ -10,21 +10,18 @@ services:
       # Server Configuration
       - PORT=3000
       - NODE_ENV=production
-      - APP_URL=http://localhost:3000
+      - APP_URL=https://login-page-inwt.onrender.com
       
       # Email Service Selection
-      - USE_SENDGRID=true
+      - USE_SENDGRID=false
       
-      # SendGrid Configuration (when USE_SENDGRID=true)
-      - SENDGRID_API_KEY=${SENDGRID_API_KEY}
+      # Brevo SMTP Configuration (Production)
+      - SMTP_HOST=smtp-relay.brevo.com
+      - SMTP_PORT=587
+      - SMTP_USER=9a07ac001@smtp-brevo.com
+      - SMTP_PASS=${SMTP_PASS}
       - FROM_EMAIL=sahilalvi769@gmail.com
       - FROM_NAME=Vidyasaar Institute
-      
-      # Gmail SMTP Configuration (when USE_SENDGRID=false)
-      - SMTP_HOST=smtp.gmail.com
-      - SMTP_PORT=465
-      - SMTP_USER=sahilalvi769@gmail.com
-      - SMTP_PASS=${SMTP_PASS}
       
       # Admin Configuration
       - ADMIN_EMAIL=sahilalvi769@gmail.com
