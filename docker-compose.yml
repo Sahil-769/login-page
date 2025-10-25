@@ -12,13 +12,19 @@ services:
       - NODE_ENV=production
       - APP_URL=http://localhost:3000
       
-      # Email Configuration (Gmail SMTP with Nodemailer)
-      - SMTP_HOST=smtp.gmail.com
-      - SMTP_PORT=587
-      - SMTP_USER=sahilalvi769@gmail.com
-      - SMTP_PASS=${SMTP_PASS}
+      # Email Service Selection
+      - USE_SENDGRID=true
+      
+      # SendGrid Configuration (when USE_SENDGRID=true)
+      - SENDGRID_API_KEY=${SENDGRID_API_KEY}
       - FROM_EMAIL=sahilalvi769@gmail.com
       - FROM_NAME=Vidyasaar Institute
+      
+      # Gmail SMTP Configuration (when USE_SENDGRID=false)
+      - SMTP_HOST=smtp.gmail.com
+      - SMTP_PORT=465
+      - SMTP_USER=sahilalvi769@gmail.com
+      - SMTP_PASS=${SMTP_PASS}
       
       # Admin Configuration
       - ADMIN_EMAIL=sahilalvi769@gmail.com

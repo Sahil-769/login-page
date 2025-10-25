@@ -1,5 +1,5 @@
 # Use Node.js LTS version
-FROM node:18-alpine AS base
+FROM node:18-alpine
 
 # Set working directory
 WORKDIR /app
@@ -7,8 +7,9 @@ WORKDIR /app
 # Copy package files first for better caching
 COPY package*.json ./
 
-# Install all dependencies (including nodemailer, express, etc.)
-RUN npm install
+# Install dependencies
+# Use npm ci for cleaner installs in production
+RUN npm ci --omit=dev || npm install --production
 
 # Copy all application files
 COPY . .
@@ -20,8 +21,8 @@ EXPOSE 3000
 ENV NODE_ENV=production
 
 # Health check
-HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD node -e "require('http').get('http://localhost:3000', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"
+HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
+  CMD node -e "require('http').get('http://localhost:' + (process.env.PORT || 3000), (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"
 
 # Start the application
 CMD ["node", "index.js"]
