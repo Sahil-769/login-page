@@ -2,18 +2,42 @@
 
 ## Render Deployment Steps
 
-### 1. Get Brevo API Key
+### 1. Get Brevo API Key (CRITICAL)
 
 ⚠️ **IMPORTANT**: We're using Brevo API (not SMTP) because Render blocks SMTP ports.
 
-1. Go to [Brevo Dashboard](https://app.brevo.com)
-2. Click **Settings** → **SMTP & API**
-3. Click **API Keys** tab
-4. Click **Generate a new API key**
-5. Name it: `Production API`
-6. Copy the API key (starts with `xkeysib-`)
+**Step-by-step to get your API key:**
 
-### 2. Environment Variables Setup
+1. Go to https://app.brevo.com
+2. Login to your account
+3. Click your profile icon (top right) → **SMTP & API**
+4. Click the **API Keys** tab
+5. Click **Generate a new API key** button
+6. Give it a name: `Production API`
+7. Click **Generate**
+8. **Copy the entire key** (starts with `xkeysib-`)
+   - ⚠️ **IMPORTANT**: You'll only see it once!
+   - It should look like: `xkeysib-xxxxxxxxxxxxxxxxxxxxx-xxxxxxxxx`
+
+### 2. Test Your API Key Locally
+
+Before deploying, test if your API key works:
+
+```bash
+# Update your .env file with the NEW API key
+# Then run the test:
+node test-brevo.js
+```
+
+You should see:
+```
+✅ SUCCESS! Email sent successfully!
+Message ID: <some-id>
+```
+
+If you get a 401 error, your API key is invalid. Generate a new one.
+
+### 3. Environment Variables Setup
 
 Go to your Render dashboard and add these environment variables:
 
